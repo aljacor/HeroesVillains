@@ -1,0 +1,210 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+ 
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    position: absolute;
+    /*top: 320px;*/
+    width: 100%;
+    text-align: -webkit-center;
+    -webkit-align-content: center;
+    overflow-y: auto;
+    background-image: url("../Assets/images/Marvel_Dc_backgroundBW.jpg")
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.profile-card {
+    max-width: 350px;
+    max-height:500px;
+    background-color: #FFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.profile-card img {
+    transition: all linear 0.25s;
+}
+
+
+
+.profile-card .profile-name {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FFF;
+    padding: 15px 20px;
+    transition: all linear 0.25s;
+}
+
+.profile-card .profile-side {
+    position: absolute;
+    color: #FFF;
+    left: 30px;
+    top: 80px;
+    font-size: 20px;
+    transition: all linear 0.25s;
+}
+
+.profile-card .profile-gender {
+    position: absolute;
+    bottom: 40px;
+    left: 30px;
+    color: #FFF;
+    font-size: 20px;
+    transition: all linear 0.25s;
+}
+
+.profile-card .profile-realname {
+    position: absolute;
+    left: 30px;
+    bottom: 70px;
+    font-size: 30px;
+    color: #FFF;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    transition: all linear 0.25s;
+}
+
+.profile-card:hover img {
+    filter: grayscale(100%);
+}
+
+.profile-card:hover .profile-name {
+    top: 20px;
+}
+
+.profile-card:hover .profile-side {
+    top: 90px;
+}
+
+.profile-card:hover .profile-realname {
+    bottom: 80px;
+}
+
+.profile-card:hover .profile-gender {
+    bottom: 50px;
+}
+
+.profile-card-2 {
+    max-width: 300px;
+    max-height:450px;
+    /*background-color: #FFF;*/
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.profile-card-2 img {
+    transition: all linear 0.25s;
+    
+}
+
+
+
+.profile-card-2 .profile-name {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FFF;
+    padding: 15px 20px;
+}
+
+.profile-card-2 .profile-side {
+    position: absolute;
+    color: #FFF;
+    left: 30px;
+    top: 80px;
+    font-size: 20px;
+}
+
+.tab-pane{
+    background-color:#FFF
+}
+
+.tab-conttent{
+    background-color:#FFF;
+    height:100%
+}

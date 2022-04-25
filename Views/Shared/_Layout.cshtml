@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HeroesVillainsCore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <div class="jumbotron jumbotron-fluid" style="text-align:center; margin-bottom:0">
+        <div class="container">
+            <img src="~/Assets/images/title.png" class="img-fluid">
+            <hr class="my-4">
+            <p>You can try searching for "Deadpool"</p>
+
+            @using (Html.BeginForm("Index", "HeroVillain", FormMethod.Post))
+            {
+                <div class="form-inline my-2 my-lg-0" style="place-content:center;">
+                    <input class="form-control mr-sm-2" style="max-width: 75%; margin-right: 0px;" type="search" placeholder="Hero or villain name" aria-label="Search" id="txtSearch">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit" id="btnSearch" onclick="setLocalSuggest()">Search</button>
+                </div>
+            }
+
+        </div>
+    </div>
+    <div class="body-content">
+         @RenderBody()
+        
+        <div class="container">
+            <div class="row gutters-sm">
+                <div style="margin-bottom:25px;" class=".col-6 .col-md-4">
+                    <div class="profile-card-2">
+                        <img src="https://www.superherodb.com/pictures2/portraits/10/100/835.jpg" class="img img-fluid">
+                        <div class="profile-name">DEADPOOL</div>
+                        <div class="profile-side">Villian</div>
+                    </div>
+                </div>
+                <div class=".col-md-8">
+                    <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+                    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+                    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <h3>HOME</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <h3>Menu 1</h3>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <h3>Menu 2</h3>
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    </div>
+                    <div id="menu3" class="tab-pane fade">
+                        <h3>Menu 3</h3>
+                        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

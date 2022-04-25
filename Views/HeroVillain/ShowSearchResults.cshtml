@@ -1,0 +1,21 @@
+﻿@model List<HeroesVillains.Models.Character>
+
+@{
+    void cards(List<HeroesVillains.Models.Character> characters)
+    {
+        <div class="row" style="align-items:center">
+            @foreach (var item in characters)
+            {
+                <div class="profile-card">
+                    <img src=@item.Image class="img img-fluid">
+                    <div class="profile-name">@item.Name</div>
+                    <div class="profile-side">@(item.Biography.Alignment == "good" ? "Superhero" :"Villian")</div>
+                    <div class="profile-realname">@item.Biography.FullName</div>
+                    <div class="profile-gender">Gender: @item.Appearance.Gender</div>
+                </div>
+            }
+        </div>
+    }
+}
+
+@{ cards(Model); }
