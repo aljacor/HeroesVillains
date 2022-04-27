@@ -22,14 +22,14 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h3 class="d-flex align-items-center mb-3">
-                        <i class="material-icons mr-2">Details</i>
+                        <i class="material-icons mr-2">Details of @Model.Name</i>
                     </h3>
                     <div class="row">
                         <div class="col-sm-5">
-                            <h6 class="mb-0">Gender</h6>
+                            <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-7 text-secondary">
-                            @(Model.Appearance.Gender)
+                            @(Model.Biography.FullName)
                         </div>
                     </div>
                     <hr>
@@ -42,6 +42,15 @@
                         </div>
                     </div>
                     <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">Place of birth</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @(Model.Biography.PlaceOfBirth != "null" ? Model.Biography.PlaceOfBirth : "unknown")
+                        </div>
+                    </div>
+                    <hr />
                     <div class="row">
                         <div class="col-sm-5">
                             <h6 class="mb-0">First-appearance</h6>
@@ -89,49 +98,71 @@
                             }
                         </div>
                     </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">Group affiliation</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @(Model.Connections.GroupAffiliation)
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-xxl-5 col-lg-4 col-md-12 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-                    <h6 class="d-flex align-items-center mb-3">
-                        <i class="material-icons text-info mr-2">Powerstats</i>
-                    </h6>
-                    <small>Intelligence @(Model.Powerstats.Intelligence != "null" ? Model.Powerstats.Intelligence + "%" : "unknown")</small>
-                    <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Intelligence != "null" ? int.Parse(Model.Powerstats.Intelligence) : 0)%"
-                             aria-valuenow=" @(Model.Powerstats.Intelligence != "null" ? int.Parse(Model.Powerstats.Intelligence) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small>Strength @(Model.Powerstats.Strength != "null" ? Model.Powerstats.Strength + "%" : "unknown")</small>
-                    <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Strength != "null" ? int.Parse(Model.Powerstats.Strength) : 0)%"
-                             aria-valuenow=" @(Model.Powerstats.Strength != "null" ? int.Parse(Model.Powerstats.Strength) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small>Speed @(Model.Powerstats.Speed != "null" ? Model.Powerstats.Speed + "%" : "unknown")</small>
-                    <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Speed != "null" ? int.Parse(Model.Powerstats.Speed) : 0)%"
-                             aria-valuenow=" @(Model.Powerstats.Speed != "null" ? int.Parse(Model.Powerstats.Speed) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small>Durability @(Model.Powerstats.Durability != "null" ? Model.Powerstats.Durability + "%" : "unknown")</small>
-                    <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Durability != "null" ? int.Parse(Model.Powerstats.Durability) : 0)%"
-                             aria-valuenow=" @(Model.Powerstats.Durability != "null" ? int.Parse(Model.Powerstats.Durability) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small>Power @(Model.Powerstats.Power != "null" ? Model.Powerstats.Power + "%" : "unknown")</small>
-                    <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Power != "null" ? int.Parse(Model.Powerstats.Power) : 0)%"
-                             aria-valuenow=" @(Model.Powerstats.Power != "null" ? int.Parse(Model.Powerstats.Power) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small>Combat @(Model.Powerstats.Combat != "null" ? Model.Powerstats.Combat + "%" : "unknown")</small>
-                    <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Combat != "null" ? int.Parse(Model.Powerstats.Combat) : 0)%"
-                             aria-valuenow=" @(Model.Powerstats.Combat != "null" ? int.Parse(Model.Powerstats.Combat) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container" style="background-color:#FFF">
+        
+    </div>
 
 </div>
-<link rel="stylesheet" href="~/Content/Detail.css" />
+
+@section Scripts{
+    <script>
+        const labels = [
+            'Intelligence',
+            'Strength',
+            'Speed',
+            'Durability',
+            'Power',
+            'Combat',
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Powerstats',
+                borderColor: @Html.Raw(Model.Biography.Alignment == "good" ? "'rgb(184, 36, 26)'" : "'rgb(53, 56, 222)'"),
+                data: [
+                    @Html.Raw(Model.Powerstats.Intelligence != "null" ? int.Parse(Model.Powerstats.Intelligence) : 0),
+                    @Html.Raw(Model.Powerstats.Strength != "null" ? int.Parse(Model.Powerstats.Strength) : 0),
+                    @Html.Raw(Model.Powerstats.Speed != "null" ? int.Parse(Model.Powerstats.Speed) : 0),
+                    @Html.Raw(Model.Powerstats.Durability != "null" ? int.Parse(Model.Powerstats.Durability) : 0),
+                    @Html.Raw(Model.Powerstats.Power != "null" ? int.Parse(Model.Powerstats.Power) : 0),
+                    @Html.Raw(Model.Powerstats.Combat != "null" ? int.Parse(Model.Powerstats.Combat) : 0),
+                ],
+            }]
+        };
+
+        const config = {
+            type: 'radar',
+            data: data,
+            options: {}
+        };
+    </script>
+
+    <script>
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+}

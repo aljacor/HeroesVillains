@@ -207,3 +207,25 @@ body {
     background-color:#FFF;
     height:100%
 }
+
+@font-face {
+    font-family: HeroesLegend;
+    src: local("HeroesLegend"), url('../Assets/fonts/Heroes Legend.ttf') format("truetype");
+}
+
+.image-not-found {
+    max-height: 252px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25vh;
+}
+
+.background-not-found {
+    background-image: url("../Assets/images/NotFoundBackground.png");
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+}

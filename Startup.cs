@@ -21,11 +21,20 @@ namespace HeroesVillains
             Configuration = configuration;
         }
 
+
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("HERO_VILLAIN_CORS", builder =>
+            {
+                builder.WithOrigins("http://localhost:44382/")
+                .SetIsOriginAllowed(origin => true).AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddScoped<IApi<HeroesResponse>, HeroVillainService<HeroesResponse>>();
             services.AddScoped<IApi<Character>, HeroVillainService<Character>>();
             //services.AddTransient //genera nuevas instancias cada que se hace una llamada
@@ -43,14 +52,27 @@ namespace HeroesVillains
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePagesWithRedirects("/Error/{0}");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //app.Use(async (context, next) =>
+            //{
+            //    await next();
+            //    if (context.Response.StatusCode == 404)
+            //    {
+            //        context.Request.Path = "/Error";
+            //        await next();
+            //    }
+            //});
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors("HERO_VILLAIN_CORS");
 
             app.UseAuthorization();
 
@@ -62,12 +84,18 @@ namespace HeroesVillains
                 );
                 endpoints.MapControllerRoute(
                     name: "CharacterDetail",
-                    pattern: "{controller=HeroVillain}/{action=CharacterDetail}/{search?}"
+                    pattern: "Character/{search?}",
+                    defaults: new { controller = "HeroVillain", action = "CharacterDetail" }
                 );
 
                 endpoints.MapControllerRoute(
                     name: "ShowResults",
                     pattern: "HeroVillain/ShowSearchResults"
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "Error",
+                    pattern: "{controller=Error}/{action=Error}/{search?}"
                 );
             });
         }

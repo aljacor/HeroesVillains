@@ -45,10 +45,7 @@ namespace HeroesVillains.Controllers
                 {
                     ViewBag.Search = search;
                     ViewBag.TotalCount = (int)(response.Results.Count() / 20);
-                    if (response.Results.Count() > 20)
-                        ViewBag.FirstResults = response.Results.Take(20).ToList();
-                    else
-                        ViewBag.FirstResults = response.Results;
+                    ViewBag.FirstResults = response.Results;
 
                     characters = response.Results;
                 }

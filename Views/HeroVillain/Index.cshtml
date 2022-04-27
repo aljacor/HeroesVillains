@@ -8,8 +8,16 @@
 
 @if (Model.Count() > 0)
 {
-    <h1 class="hero-font">Found @Model.Count() results for "@ViewBag.Search"</h1>
     <div id="results" style="padding-left:20px; padding-right:20px">
         @{Html.RenderPartial("ShowSearchResults", (IEnumerable<HeroesVillains.Models.Character>)ViewBag.FirstResults);}
     </div>
+}
+
+@if (ViewBag.Error != null)
+{
+<script>
+    window.onload = function () {
+        swal("Error!", '@ViewBag.Error', "error");
+    }
+</script>
 }

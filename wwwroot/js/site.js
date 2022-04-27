@@ -5,13 +5,23 @@
 
 function setLocalSuggest() {
 
+    //$.ajax({
+    //    url: '/HeroVillain/Index',
+    //    type: 'POST',
+    //    // we set cache: false because GET requests are often cached by browsers
+    //    // IE is particularly aggressive in that respect
+    //    cache: false,
+    //    data: { search: $("#txtSearch").val().toLowerCase() },
+    //    success: function (result) {
+    //    }
+    //});
 
     if (localStorage.getItem("record")) {
 
         var rec = JSON.parse(localStorage.getItem("record"));
         if (!rec.includes($("#txtSearch").val().toLowerCase())) {
-            rec.push($("#tctSearch").val().toLowerCase());
-            localStorage.setItem("record", JSON.stringify(sugg));
+            rec.push($("#txtSearch").val().toLowerCase());
+            localStorage.setItem("record", JSON.stringify(rec));
         }
     } else {
         var val = $("#txtSearch").val();
@@ -20,7 +30,6 @@ function setLocalSuggest() {
     }
 
     $(document).ready(function () {
-
         $("#txtSearch").autocomplete({
             source: function (request, response) {
                 var rec = JSON.parse(localStorage.getItem("record"));
