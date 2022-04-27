@@ -64,11 +64,10 @@ body {
 }
 
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
     position: absolute;
     /*top: 320px;*/
     width: 100%;
+    height:100%;
     text-align: -webkit-center;
     -webkit-align-content: center;
     overflow-y: auto;

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace HeroesVillains.Interfaces
 {
-    interface IApi<T>
+    public interface IApi<T>
     {
-        Task<T> CallApi(string url);
+        public Task<T> CallApi(string url);
     }
 }

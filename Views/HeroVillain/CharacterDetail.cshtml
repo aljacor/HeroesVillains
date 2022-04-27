@@ -1,0 +1,137 @@
+﻿@model HeroesVillains.Models.Character
+
+@{
+    ViewBag.Title = "CharacterDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div style="margin-top:25px;" class="main-body" s>
+    <div class="row justify-content-center  gutters-sm">
+        <div style="flex-basis: content;" class="col-xxl-2 col-lg-4 col-md-6 col-sm-12">
+            <div class="profile-card" style="margin:0;">
+                <img src=@Model.Image.Url class="img img-fluid">
+                <div class="profile-name">@Model.Name</div>
+                <div class="profile-side">@(Model.Biography.Alignment == "good" ? "Superhero" :"Villian")</div>
+                <div class="profile-realname">@Model.Biography.FullName</div>
+                <div class="profile-gender">Gender: @Model.Appearance.Gender</div>
+            </div>
+        </div>
+        <div class="col-xxl-5 col-lg-4 col-md-6 col-sm-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3 class="d-flex align-items-center mb-3">
+                        <i class="material-icons mr-2">Details</i>
+                    </h3>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">Gender</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @(Model.Appearance.Gender)
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">Race</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @(Model.Appearance.Race != "null" ? Model.Appearance.Race  : "unknown")
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">First-appearance</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @(Model.Biography.FirstAppearance)
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">Publisher</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @(Model.Biography.Publisher)
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">Alignment</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @(Model.Biography.Alignment)
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">Alter-egos</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @(Model.Biography.AlterEgos)
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h6 class="mb-0">Aliases</h6>
+                        </div>
+                        <div class="col-sm-7 text-secondary">
+                            @foreach (string aliases in @Model.Biography.Aliases)
+                            {
+                                <span>@(aliases + " - ")</span>;
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-5 col-lg-4 col-md-12 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h6 class="d-flex align-items-center mb-3">
+                        <i class="material-icons text-info mr-2">Powerstats</i>
+                    </h6>
+                    <small>Intelligence @(Model.Powerstats.Intelligence != "null" ? Model.Powerstats.Intelligence + "%" : "unknown")</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Intelligence != "null" ? int.Parse(Model.Powerstats.Intelligence) : 0)%"
+                             aria-valuenow=" @(Model.Powerstats.Intelligence != "null" ? int.Parse(Model.Powerstats.Intelligence) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Strength @(Model.Powerstats.Strength != "null" ? Model.Powerstats.Strength + "%" : "unknown")</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Strength != "null" ? int.Parse(Model.Powerstats.Strength) : 0)%"
+                             aria-valuenow=" @(Model.Powerstats.Strength != "null" ? int.Parse(Model.Powerstats.Strength) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Speed @(Model.Powerstats.Speed != "null" ? Model.Powerstats.Speed + "%" : "unknown")</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Speed != "null" ? int.Parse(Model.Powerstats.Speed) : 0)%"
+                             aria-valuenow=" @(Model.Powerstats.Speed != "null" ? int.Parse(Model.Powerstats.Speed) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Durability @(Model.Powerstats.Durability != "null" ? Model.Powerstats.Durability + "%" : "unknown")</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Durability != "null" ? int.Parse(Model.Powerstats.Durability) : 0)%"
+                             aria-valuenow=" @(Model.Powerstats.Durability != "null" ? int.Parse(Model.Powerstats.Durability) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Power @(Model.Powerstats.Power != "null" ? Model.Powerstats.Power + "%" : "unknown")</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Power != "null" ? int.Parse(Model.Powerstats.Power) : 0)%"
+                             aria-valuenow=" @(Model.Powerstats.Power != "null" ? int.Parse(Model.Powerstats.Power) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Combat @(Model.Powerstats.Combat != "null" ? Model.Powerstats.Combat + "%" : "unknown")</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-info" role="progressbar" style="width:   @(Model.Powerstats.Combat != "null" ? int.Parse(Model.Powerstats.Combat) : 0)%"
+                             aria-valuenow=" @(Model.Powerstats.Combat != "null" ? int.Parse(Model.Powerstats.Combat) : 0)" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<link rel="stylesheet" href="~/Content/Detail.css" />

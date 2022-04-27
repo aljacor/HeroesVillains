@@ -31,6 +31,11 @@ namespace HeroesVillains.Models
 
         [JsonProperty("image")]
         public Image Image { get; set; }
+
+        [JsonProperty("error")]
+        public string Error { get; set; }
+        [JsonProperty("response")]
+        public string Response { get; set; }
     }
 
     public partial class Appearance
@@ -96,22 +101,22 @@ namespace HeroesVillains.Models
     public partial class Powerstats
     {
         [JsonProperty("intelligence")]
-        public long Intelligence { get; set; }
+        public string Intelligence { get; set; }
 
         [JsonProperty("strength")]
-        public long Strength { get; set; }
+        public string Strength { get; set; }
 
         [JsonProperty("speed")]
-        public long Speed { get; set; }
+        public string Speed { get; set; }
 
         [JsonProperty("durability")]
-        public long Durability { get; set; }
+        public string Durability { get; set; }
 
         [JsonProperty("power")]
-        public long Power { get; set; }
+        public string Power { get; set; }
 
         [JsonProperty("combat")]
-        public long Combat { get; set; }
+        public string Combat { get; set; }
     }
 
     public partial class Work
@@ -122,6 +127,19 @@ namespace HeroesVillains.Models
         [JsonProperty("base")]
         public string Base { get; set; }
     }
-    
 
+    public class HeroesResponse
+    {
+        [JsonProperty("response")]
+        public string Response { get; set; }
+
+        [JsonProperty("error")]
+        public string Error { get; set; }
+
+        [JsonProperty("results-for")]
+        public string ResultsFor { get; set; }
+
+        [JsonProperty("results")]
+        public List<Character> Results { get; set; }
+    }
 }

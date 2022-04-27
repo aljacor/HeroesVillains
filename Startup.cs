@@ -1,3 +1,6 @@
+using HeroesVillains.Interfaces;
+using HeroesVillains.Models;
+using HeroesVillains.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +26,11 @@ namespace HeroesVillains
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IApi<HeroesResponse>, HeroVillainService<HeroesResponse>>();
+            services.AddScoped<IApi<Character>, HeroVillainService<Character>>();
+            //services.AddTransient //genera nuevas instancias cada que se hace una llamada
+            //services.AddSingleton //Se genera sólo una unstancia
+            services.AddControllers();
             services.AddControllersWithViews();
         }
 
@@ -48,13 +56,19 @@ namespace HeroesVillains
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller=Home}/{action=Index}/{id?}");
-
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=HeroVillain}/{action=Index}/{id?}");
+                    pattern: "{controller=HeroVillain}/{action=Index}/{search?}"
+                );
+                endpoints.MapControllerRoute(
+                    name: "CharacterDetail",
+                    pattern: "{controller=HeroVillain}/{action=CharacterDetail}/{search?}"
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "ShowResults",
+                    pattern: "HeroVillain/ShowSearchResults"
+                );
             });
         }
     }
