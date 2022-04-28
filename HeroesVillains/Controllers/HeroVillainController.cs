@@ -15,7 +15,6 @@ namespace HeroesVillains.Controllers
     {
         private IApi<HeroesResponse> apiCall;
         private IApi<Character> apiCallChar;
-        private IApi<Character> apiCallCharacter;
         private IConfiguration config;
         public HeroVillainController(IApi<HeroesResponse> api, IConfiguration configuration, IApi<Character> apiChar)
         {
