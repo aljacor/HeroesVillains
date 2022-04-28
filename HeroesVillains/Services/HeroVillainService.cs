@@ -25,17 +25,17 @@ namespace HeroesVillains.Services
                 if (string.IsNullOrEmpty(url))
                     throw new ArgumentException("Url can't be null or empty");
 
-                T GetCallResult = default;
+                T getCallResult = default;
 
                 var response = httpClient.GetAsync(url);
 
                 if (response.Result.IsSuccessStatusCode)
                 {
                     var json = await response.Result.Content.ReadAsStringAsync();
-                    GetCallResult = JsonConvert.DeserializeObject<T>(json);
+                    getCallResult = JsonConvert.DeserializeObject<T>(json);
                 }
 
-                return GetCallResult;
+                return getCallResult;
 
             }
             catch (ArgumentException ex)

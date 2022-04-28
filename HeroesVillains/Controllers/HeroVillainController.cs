@@ -2,27 +2,25 @@
 using HeroesVillains.Interfaces;
 using HeroesVillains.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HeroesVillains.Controllers
 {
     public class HeroVillainController : Controller
     {
-        private IApi<HeroesResponse> apiCall;
-        private IApi<Character> apiCallChar;
-        private IConfiguration config;
+        private IApi<HeroesResponse> _apiCall;
+        private IApi<Character> _apiCallChar;
+        private IConfiguration _config;
         public HeroVillainController(IApi<HeroesResponse> api, IConfiguration configuration, IApi<Character> apiChar)
         {
-            apiCall = api;
-            apiCallChar = apiChar;
-            config = configuration;
+            _apiCall = api;
+            _apiCallChar = apiChar;
+            _config = configuration;
         }
-
+        //Get the characters searching by the name
         public async Task<IActionResult> Index(string search)
         {
             try
@@ -33,9 +31,9 @@ namespace HeroesVillains.Controllers
                     return View(characters);
                 }
 
-                UsingApiHelper helper = new UsingApiHelper(config);
+                UsingApiHelper helper = new UsingApiHelper(_config);
 
-                HeroesResponse response = await apiCall.CallApi(helper.CompleteSearchUri(search));
+                HeroesResponse response = await _apiCall.CallApi(helper.CompleteSearchUri(search));
                 if (!string.IsNullOrEmpty(response.Response) && response.Response.Equals("error"))
                 {
                     ViewBag.Error = response.Error;
@@ -43,7 +41,6 @@ namespace HeroesVillains.Controllers
                 else
                 {
                     ViewBag.Search = search;
-                    ViewBag.TotalCount = (int)(response.Results.Count() / 20);
                     ViewBag.FirstResults = response.Results;
 
                     characters = response.Results;
@@ -58,13 +55,7 @@ namespace HeroesVillains.Controllers
             }
         }
 
-        public IActionResult ShowSearchResult(List<Character> source, int pageIndex)
-        {
-            ViewBag.CurrentPage = pageIndex;
-            var page = PaginationHelper<Character>.CreatePage(source, pageIndex, 20);
-            return View(page);
-        }
-
+        //Get the information of a specific character
         public async Task<IActionResult> CharacterDetail(string search)
         {
             try
@@ -75,9 +66,9 @@ namespace HeroesVillains.Controllers
                     return RedirectToAction("NotFound", "Error");
                 }
                 
-                UsingApiHelper helper = new UsingApiHelper(config);
+                UsingApiHelper helper = new UsingApiHelper(_config);
 
-                Character response = await apiCallChar.CallApi(helper.SearchById(search));
+                Character response = await _apiCallChar.CallApi(helper.SearchById(search));
                 if (!string.IsNullOrEmpty(response.Response) && response.Response.Equals("error"))
                 {
                     return RedirectToAction("NotFound", "Error");
@@ -86,7 +77,6 @@ namespace HeroesVillains.Controllers
                 {
                     character = response;
                 }
-
 
                 return View(character);
             }
