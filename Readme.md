@@ -3,7 +3,7 @@
 Heroes and villains is a web application made to search for characters from different universes.
 
 ## Requirements
-- Net Framework 4.7.1 installed
+- Net Core 3.1 installed
 - Visual Studio 2019 or higher
 
 ## Instructions 
